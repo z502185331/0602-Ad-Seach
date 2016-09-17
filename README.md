@@ -1,6 +1,3 @@
-# 0602-Ad-Seach
-
-
 # Ad Searching System 0602 
 
 
