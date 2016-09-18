@@ -37,6 +37,8 @@ Basic process flow: Query understanding -> Select Ads Candidates -> Rank Ads ->F
 - Previous Project Example[link](https://github.com/BitTigerInst/ads-searching-system)
 - Apache Lucene 中文学习资料[link](http://www.wxdl.cn/index/lucene-source.html)
 - Memcached Tutorial[link](http://www.tutorialspoint.com/memcached/)
+- Spring in action[link](http://pdf.th7.cn/down/files/1508/Spring%20in%20Action,%204th%20Edition.pdf)
+- Bittiger project tutorial[link](https://www.bittiger.io/classpage/w8pphM4Sahx54kAm3)
 
 #License
 See the [LICENSE](https://opensource.org/licenses/MIT) file for license rights and limitations (MIT).
