@@ -20,17 +20,17 @@ Basic process flow: Query understanding -> Select Ads Candidates -> Rank Ads ->F
 # Time Schedule
 | Stage | Start  | End | Goals |
 | ------------- | ------------- | ------------- | ------------- |
-| 0st Week | 08/29/16  | 09/04/16 | Build up team and create github repository
-| 1nd Week | 09/05/16  | 09/11/16 | Set up environment and start front-end|
-| 2th Week | 09/12/16  | 09/18/16 | Finish front-end and start back-end |
+| 0 Week   | 08/29/16  | 09/04/16 | Build up team and create github repository
+| 1st Week | 09/05/16  | 09/11/16 | Set up environment and start front-end|
+| 2nd Week | 09/12/16  | 09/18/16 | Finish front-end and start back-end |
 | 3th Week | 09/19/16  | 09/25/16 | Back-end and connection to twitter API  |
 | 4th Week | 09/26/16  | 10/02/16 | Go over whole process and fix bugs |
 | 5th Week | 10/03/16  | 10/09/16 | Fix bug and prepare presentation |
 
 
 # Used Technology
-- Front-end AngularJS Bootstrap
-- Backend Spring MVC Jetty Lucene Memcached MongoDB
+- Front-end: AngularJS Bootstrap
+- Backend: Spring MVC Jetty Lucene Memcached MongoDB
 - NLP algorithm
 
 # Resource 
