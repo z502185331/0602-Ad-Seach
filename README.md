@@ -14,7 +14,7 @@ Basic process flow: Query understanding -> Select Ads Candidates -> Rank Ads ->F
 
 
 # Functionality
-- User can search input words he what to search
+- User can input keywords and search whatever he want to search
 - All ads should list in a the page and ranked
 
 # Time Schedule
@@ -23,7 +23,7 @@ Basic process flow: Query understanding -> Select Ads Candidates -> Rank Ads ->F
 | 0 Week   | 08/29/16  | 09/04/16 | Build up team and create github repository
 | 1st Week | 09/05/16  | 09/11/16 | Set up environment and start front-end|
 | 2nd Week | 09/12/16  | 09/18/16 | Finish front-end and start back-end |
-| 3th Week | 09/19/16  | 09/25/16 | Back-end and connection to twitter API  |
+| 3rd Week | 09/19/16  | 09/25/16 | Back-end and connection to twitter API  |
 | 4th Week | 09/26/16  | 10/02/16 | Go over whole process and fix bugs |
 | 5th Week | 10/03/16  | 10/09/16 | Fix bug and prepare presentation |
 
