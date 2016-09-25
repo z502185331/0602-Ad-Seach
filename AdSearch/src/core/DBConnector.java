@@ -10,7 +10,6 @@ import com.mongodb.client.model.UpdateOptions;
 import org.bson.BSONObject;
 import org.bson.Document;
 import org.bson.types.ObjectId;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -211,7 +210,6 @@ public class DBConnector {
         // If the target keyword is not in the DB, then insert the keyword
         UpdateOptions option = new UpdateOptions();
         option.upsert(true);
-
         keywordCollection.updateOne(new BasicDBObject("keyword", keyword),
                 new BasicDBObject("$push", new BasicDBObject("adId", adId)), option);
     }
