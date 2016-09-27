@@ -1,4 +1,4 @@
-package core;
+package io.bittiger.ads.api;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
@@ -17,15 +17,18 @@ import java.util.List;
 /**
  * Created by lieyongzou on 9/8/16.
  * A class to connect with local MongoDB
- * Table Campaign: _id, username, compaignName, budget
- * Table Ad: _id, campaignId, keywords, pClick, bid, url, content
+ * Table Campaign: _id, compaignName, budget
+ * Table Ad: _id, campaignId, keywords, clickCount, displayCount, bid, url, content
  * Table inverted index: _id, keyword, adId
+ * 
+ * pClick = clickCount / displayCount
  */
 public class DBConnector {
 
     private static final String SERVERADDR = "localhost";
     private static final int PORTNUMBER = 27017;
-    private static final double PCLICKINIT = 0.5;   // The percentage that users click the ad
+    private static final int INITCLICKCOUNT = 1;
+    private static final int INITDISPLAYCOUNT = 2;
 
     // The connection to the ads collection
     private MongoCollection<Document> adCollection;
@@ -126,7 +129,8 @@ public class DBConnector {
         doc.append("campaignId", campaignId);
         doc.append("keywords", keywords);
         doc.append("bid", bid);
-        doc.append("pClick", PCLICKINIT);
+        doc.append("clickCount", INITCLICKCOUNT);
+        doc.append("displayCount", INITDISPLAYCOUNT);
         doc.append("url", url);
         doc.append("content", content);
 
