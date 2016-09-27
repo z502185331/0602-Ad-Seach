@@ -7,10 +7,15 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.UpdateOptions;
+
+import io.bittiger.ads.entity.Ad;
+import io.bittiger.ads.entity.Compaign;
+
 import org.bson.BSONObject;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -56,7 +61,7 @@ public class DBConnector {
      * @param budget the expected budget
      * @return the objectid of newly created campaign
      */
-    public ObjectId createCampaign(String campaignName, int budget) {
+    public Compaign createCampaign(String campaignName, double budget) {
 
         //Create the document contains all the informations
         Document doc = new Document();
@@ -65,22 +70,23 @@ public class DBConnector {
 
         // insert to the db
         campaignCollection.insertOne(doc);
-        return (ObjectId)doc.get("_id");
+        return new Compaign(doc.getString("_id"), campaignName, budget);
     }
 
     /**
      * A method to get a list of campaigns owned by the user
      * @return a list of campaigns
      */
-    public List<Document> getCampaigns() {
+    public List<Compaign> getCampaigns() {
 
         // Get all the campaigns
         FindIterable<Document> findIterable = campaignCollection.find();
         MongoCursor<Document> mongoCursor = findIterable.iterator();
 
-        List<Document> campaigns = new ArrayList<>();
+        List<Compaign> campaigns = new ArrayList<>();
         while (mongoCursor.hasNext()) {
-            campaigns.add(mongoCursor.next());
+        	Document doc = mongoCursor.next();
+            campaigns.add(new Compaign(doc.getString("_id"), doc.getString("campaignName"), doc.getDouble("budget")));
         }
 
         return campaigns;
@@ -91,16 +97,17 @@ public class DBConnector {
      * @param campaignId the id of campaign
      * @return the campaign
      */
-    public Document getCampaignsById(String campaignId) {
+    public Compaign getCampaignsById(String campaignId) {
 
         // Get all the campaigns
         FindIterable<Document> findIterable = campaignCollection.find(new BasicDBObject("_id", new ObjectId(campaignId)));
         MongoCursor<Document> mongoCursor = findIterable.iterator();
 
         if (mongoCursor.hasNext()) {
-            return mongoCursor.next();
+        	Document doc = mongoCursor.next();
+            return new Compaign(doc.getString("_id"), doc.getString("campaignName"), doc.getDouble("budget"));
         } else {
-            return null;
+            return new Compaign();
         }
     }
 
@@ -108,7 +115,7 @@ public class DBConnector {
      * A method to update the budget of campaign
      * @param campaignId the id of campaign
      */
-    public void updateBudget(String campaignId, int budget) {
+    public void updateBudget(String campaignId, double budget) {
 
         campaignCollection.updateOne(new BasicDBObject("_id", new ObjectId(campaignId)),
                 new BasicDBObject("$set", new BasicDBObject("budget", budget)));
@@ -123,7 +130,7 @@ public class DBConnector {
      * @param url the external url of ad
      * @param content the content of ad
      */
-    public String createAd(String campaignId, String keywords, int bid, String url, String content) {
+    public Ad createAd(String campaignId, String keywords, double bid, String url, String content) {
 
         Document doc = new Document();
         doc.append("campaignId", campaignId);
@@ -144,7 +151,7 @@ public class DBConnector {
             insertKeyword(keyword.trim().toLowerCase(), adId);
         }
 
-        return adId;
+        return new Ad(doc.getString("_id"), campaignId, Arrays.asList(keywordArray), INITCLICKCOUNT, INITDISPLAYCOUNT, bid, url, content);
     }
 
 
@@ -192,15 +199,17 @@ public class DBConnector {
      * @param adId the id of ad
      * @return the ad
      */
-    public Document getAdsById(String adId) {
+    public Ad getAdsById(String adId) {
         FindIterable<Document> findIterable = adCollection.find(new BasicDBObject("_id", new ObjectId(adId)));
         MongoCursor<Document> mongoCursor = findIterable.iterator();
 
         if (mongoCursor.hasNext()) {
-            return mongoCursor.next();
+        	Document doc = mongoCursor.next();
+            return new Ad(doc.getString("_id"), doc.getString("campaignId"), splitKeywords(doc.getString("keywords")), 
+            		doc.getInteger("clickCount"), doc.getInteger("displayCount"), doc.getDouble("bid"), doc.getString("url"), 
+            		doc.getString("content"));
         }
-
-        return null;
+        return new Ad();
     }
 
 
@@ -219,8 +228,17 @@ public class DBConnector {
     }
 
 
-
-
+    /**
+     * A method to split the keywords into a list
+     * @param keywords s sentence of keywords
+     * @return a list of keywords
+     */
+    private List<String> splitKeywords(String keywords) {
+    	
+    	String[] res = keywords.trim().split(",");
+    	return Arrays.asList(res);
+    	
+    }
 
 
     public static void main(String[] args) {

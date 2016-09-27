@@ -1,12 +1,18 @@
 package io.bittiger.ads.entity;
 
-public class Compaigns {
+public class Compaign {
 
 	private String id;
 	private String name;
 	private double budget;
 	
-	public Compaigns(String id, String name, double budget) {
+	public Compaign() {
+		this.id = "";
+		this.name = "";
+		this.budget = 0;
+	}
+	
+	public Compaign(String id, String name, double budget) {
 		super();
 		this.id = id;
 		this.name = name;

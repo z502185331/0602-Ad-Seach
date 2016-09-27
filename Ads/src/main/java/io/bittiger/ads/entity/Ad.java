@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by ChenCheng on 9/25/2016.
  */
-public class Ads {
+public class Ad {
 
     private String adId;
     private String campaignId;
@@ -14,10 +14,17 @@ public class Ads {
     private int displayCount;
     private double bid;
     private String url;
-    private String intro;
+    private String content;
 
-	public Ads(String adId, String campaignId, List<String> keywords, int clickCount, int displayCount, double bid, String url,
-			String intro) {
+    
+    
+	public Ad() {
+		super();
+	}
+
+
+	public Ad(String adId, String campaignId, List<String> keywords, int clickCount, int displayCount, double bid, String url,
+			String content) {
 		super();
 		this.adId = adId;
 		this.campaignId = campaignId;
@@ -26,7 +33,7 @@ public class Ads {
 		this.displayCount = displayCount;
 		this.bid = bid;
 		this.url = url;
-		this.intro = intro;
+		this.content = content;
 	}
     
 	
@@ -81,13 +88,13 @@ public class Ads {
 	}
 
 
-	public String getIntro() {
-		return intro;
+	public String getContent() {
+		return content;
 	}
 
 
-	public void setIntro(String intro) {
-		this.intro = intro;
+	public void setContent(String content) {
+		this.content = content;
 	}
     
 
