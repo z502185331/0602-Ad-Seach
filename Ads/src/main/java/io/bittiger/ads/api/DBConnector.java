@@ -11,7 +11,6 @@ import com.mongodb.client.model.UpdateOptions;
 import io.bittiger.ads.entity.Ad;
 import io.bittiger.ads.entity.Compaign;
 
-import org.bson.BSONObject;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import java.util.ArrayList;
