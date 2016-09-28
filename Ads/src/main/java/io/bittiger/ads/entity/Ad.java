@@ -97,5 +97,10 @@ public class Ad {
 		this.content = content;
 	}
     
+	@Override
+	public String toString() {
+		return "Ad : " + this.adId + ", " + this.campaignId + ", " + this.keywords + ", " + this.clickCount + ", " + this.displayCount
+				+ ", " + this.bid + ", " +  this.url + ", " +  this.content;
+	}
 
 }

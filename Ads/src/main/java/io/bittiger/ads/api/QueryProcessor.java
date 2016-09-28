@@ -1,5 +1,9 @@
 package io.bittiger.ads.api;
 
-public class QueryProcessor {
 
+
+public class QueryProcessor {
+	
+	
+	
 }

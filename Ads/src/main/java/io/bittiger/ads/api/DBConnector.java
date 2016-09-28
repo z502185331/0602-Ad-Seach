@@ -69,7 +69,7 @@ public class DBConnector {
 
         // insert to the db
         campaignCollection.insertOne(doc);
-        return new Compaign(doc.getString("_id"), campaignName, budget);
+        return new Compaign(doc.get("_id").toString(), campaignName, budget);
     }
 
     /**
@@ -85,7 +85,7 @@ public class DBConnector {
         List<Compaign> campaigns = new ArrayList<>();
         while (mongoCursor.hasNext()) {
         	Document doc = mongoCursor.next();
-            campaigns.add(new Compaign(doc.getString("_id"), doc.getString("campaignName"), doc.getDouble("budget")));
+            campaigns.add(new Compaign(doc.get("_id").toString(), doc.getString("campaignName"), doc.getDouble("budget")));
         }
 
         return campaigns;
@@ -104,7 +104,7 @@ public class DBConnector {
 
         if (mongoCursor.hasNext()) {
         	Document doc = mongoCursor.next();
-            return new Compaign(doc.getString("_id"), doc.getString("campaignName"), doc.getDouble("budget"));
+            return new Compaign(doc.get("_id").toString(), doc.getString("campaignName"), doc.getDouble("budget"));
         } else {
             return new Compaign();
         }
@@ -150,7 +150,7 @@ public class DBConnector {
             insertKeyword(keyword.trim().toLowerCase(), adId);
         }
 
-        return new Ad(doc.getString("_id"), campaignId, Arrays.asList(keywordArray), INITCLICKCOUNT, INITDISPLAYCOUNT, bid, url, content);
+        return new Ad(doc.get("_id").toString(), campaignId, Arrays.asList(keywordArray), INITCLICKCOUNT, INITDISPLAYCOUNT, bid, url, content);
     }
 
 
@@ -204,7 +204,7 @@ public class DBConnector {
 
         if (mongoCursor.hasNext()) {
         	Document doc = mongoCursor.next();
-            return new Ad(doc.getString("_id"), doc.getString("campaignId"), splitKeywords(doc.getString("keywords")), 
+            return new Ad(doc.get("_id").toString(), doc.getString("campaignId"), splitKeywords(doc.getString("keywords")), 
             		doc.getInteger("clickCount"), doc.getInteger("displayCount"), doc.getDouble("bid"), doc.getString("url"), 
             		doc.getString("content"));
         }

@@ -39,6 +39,10 @@ public class Compaign {
 		this.budget += budget;
 	}
 	
+	@Override
+	public String toString() {
+		return "Compaign " + this.id + " : name : " + this.name + ", budget: " + this.budget;
+	}
 	
 	
 }
