@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by ChenCheng on 9/25/2016.
  */
-public class Ad {
+public class Ad implements Comparable<Ad> {
 
     private String adId;
     private String campaignId;
@@ -15,6 +15,7 @@ public class Ad {
     private double bid;
     private String url;
     private String content;
+    private double rankScore;
 
     
     
@@ -96,11 +97,27 @@ public class Ad {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+	public void setRankScore(double rankScore) {
+		this.rankScore = rankScore;
+	}
+	
+	public double getRankScore() {
+		return this.rankScore;
+	}
     
 	@Override
 	public String toString() {
-		return "Ad : " + this.adId + ", " + this.campaignId + ", " + this.keywords + ", " + this.clickCount + ", " + this.displayCount
+		return "Rank score: " + this.rankScore + " Ad : " + this.adId + ", " + this.campaignId + ", " + this.keywords + ", " + this.clickCount + ", " + this.displayCount
 				+ ", " + this.bid + ", " +  this.url + ", " +  this.content;
 	}
+
+
+	@Override
+	public int compareTo(Ad o) {
+		return ((Double)o.rankScore).compareTo(this.rankScore);
+	}
+	
+
 
 }

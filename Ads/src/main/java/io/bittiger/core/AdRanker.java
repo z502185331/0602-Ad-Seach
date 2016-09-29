@@ -1,5 +1,14 @@
 package io.bittiger.core;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import io.bittiger.ads.api.DBConnector;
+import io.bittiger.ads.entity.Ad;
+
 /**
  * A class to rank the ads
  * @author lieyongz
@@ -11,5 +20,50 @@ package io.bittiger.core;
  *
  */
 public class AdRanker {
-
+	
+	private List<Ad> ads = new ArrayList<>();
+	
+	
+	/**
+	 * A method to execute rank task to rank the ads related to the keywords 
+	 * @param keywords the list of keywords
+	 * @return a list of ads
+	 */
+	public List<Ad> execute(List<String> keywords) {
+		
+		List<Ad> ads = new ArrayList<>();
+		
+		// The connector to mongodb
+		DBConnector connector = new DBConnector();
+		
+		// Build HitCountMap
+		Map<String, Integer> hitCountMap = new HashMap<>();
+		for (String keyword : keywords) {
+			
+			// Get the list of id with the keyword
+			List<String> ids = connector.getAdsByKeyword(keyword);
+			for (String id : ids) {
+				hitCountMap.putIfAbsent(id, 1);
+				hitCountMap.put(id, hitCountMap.get(id) + 1);
+			}
+		}
+		
+		// Calculate the rank score
+		for (Map.Entry<String, Integer> entry : hitCountMap.entrySet()) {
+			
+			Ad ad = connector.getAdsById(entry.getKey());
+			double relavanceScore = (double) entry.getValue() / ad.getKeywords().size();
+			double qualityScore = (double) 0.75 * ad.getpClick() + 0.25 * relavanceScore;
+			double rankScore = qualityScore * ad.getBid();
+			
+			ad.setRankScore(rankScore);
+			ads.add(ad);
+		}
+		
+		// Sort the ads
+		Collections.sort(ads);
+		
+		return ads;
+	}
+	
 }
