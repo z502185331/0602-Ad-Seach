@@ -1,18 +1,18 @@
 package io.bittiger.ads.entity;
 
-public class Compaign {
+public class Campaign {
 
 	private String id;
 	private String name;
 	private double budget;
 	
-	public Compaign() {
+	public Campaign() {
 		this.id = "";
 		this.name = "";
 		this.budget = 0;
 	}
 	
-	public Compaign(String id, String name, double budget) {
+	public Campaign(String id, String name, double budget) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -41,7 +41,7 @@ public class Compaign {
 	
 	@Override
 	public String toString() {
-		return "Compaign " + this.id + " : name : " + this.name + ", budget: " + this.budget;
+		return "Campaign " + this.id + " : name : " + this.name + ", budget: " + this.budget;
 	}
 	
 	

@@ -15,10 +15,12 @@ public class Ad implements Comparable<Ad> {
     private double bid;
     private String url;
     private String content;
+    
     private double rankScore;
+    private double relevanceScore;
+    private double qualityScore;
 
-    
-    
+
 	public Ad() {
 		super();
 	}
@@ -104,6 +106,25 @@ public class Ad implements Comparable<Ad> {
 	
 	public double getRankScore() {
 		return this.rankScore;
+	}
+	
+	public double getRelevanceScore() {
+		return relevanceScore;
+	}
+
+
+	public void setRelevanceScore(double relevanceScore) {
+		this.relevanceScore = relevanceScore;
+	}
+
+
+	public double getQualityScore() {
+		return qualityScore;
+	}
+
+
+	public void setQualityScore(double qualityScore) {
+		this.qualityScore = qualityScore;
 	}
     
 	@Override

@@ -9,7 +9,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.UpdateOptions;
 
 import io.bittiger.ads.entity.Ad;
-import io.bittiger.ads.entity.Compaign;
+import io.bittiger.ads.entity.Campaign;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -60,7 +60,7 @@ public class DBConnector {
      * @param budget the expected budget
      * @return the objectid of newly created campaign
      */
-    public Compaign createCampaign(String campaignName, double budget) {
+    public Campaign createCampaign(String campaignName, double budget) {
 
         //Create the document contains all the informations
         Document doc = new Document();
@@ -69,23 +69,23 @@ public class DBConnector {
 
         // insert to the db
         campaignCollection.insertOne(doc);
-        return new Compaign(doc.get("_id").toString(), campaignName, budget);
+        return new Campaign(doc.get("_id").toString(), campaignName, budget);
     }
 
     /**
      * A method to get a list of campaigns owned by the user
      * @return a list of campaigns
      */
-    public List<Compaign> getCampaigns() {
+    public List<Campaign> getCampaigns() {
 
         // Get all the campaigns
         FindIterable<Document> findIterable = campaignCollection.find();
         MongoCursor<Document> mongoCursor = findIterable.iterator();
 
-        List<Compaign> campaigns = new ArrayList<>();
+        List<Campaign> campaigns = new ArrayList<>();
         while (mongoCursor.hasNext()) {
         	Document doc = mongoCursor.next();
-            campaigns.add(new Compaign(doc.get("_id").toString(), doc.getString("campaignName"), doc.getDouble("budget")));
+            campaigns.add(new Campaign(doc.get("_id").toString(), doc.getString("campaignName"), doc.getDouble("budget")));
         }
 
         return campaigns;
@@ -96,7 +96,7 @@ public class DBConnector {
      * @param campaignId the id of campaign
      * @return the campaign
      */
-    public Compaign getCampaignsById(String campaignId) {
+    public Campaign getCampaignsById(String campaignId) {
 
         // Get all the campaigns
         FindIterable<Document> findIterable = campaignCollection.find(new BasicDBObject("_id", new ObjectId(campaignId)));
@@ -104,9 +104,9 @@ public class DBConnector {
 
         if (mongoCursor.hasNext()) {
         	Document doc = mongoCursor.next();
-            return new Compaign(doc.get("_id").toString(), doc.getString("campaignName"), doc.getDouble("budget"));
+            return new Campaign(doc.get("_id").toString(), doc.getString("campaignName"), doc.getDouble("budget"));
         } else {
-            return new Compaign();
+            return new Campaign();
         }
     }
 

@@ -52,16 +52,16 @@ public class AdRanker {
 		for (Map.Entry<String, Integer> entry : hitCountMap.entrySet()) {
 			
 			Ad ad = connector.getAdsById(entry.getKey());
-			double relavanceScore = (double) entry.getValue() / ad.getKeywords().size();
-			double qualityScore = (double) 0.75 * ad.getpClick() + 0.25 * relavanceScore;
+			double relevanceScore = (double) entry.getValue() / ad.getKeywords().size();
+			double qualityScore = (double) 0.75 * ad.getpClick() + 0.25 * relevanceScore;
 			double rankScore = qualityScore * ad.getBid();
 			
+			ad.setRelevanceScore(relevanceScore);
+			ad.setQualityScore(qualityScore);
 			ad.setRankScore(rankScore);
+			
 			ads.add(ad);
 		}
-		
-		// Sort the ads
-		Collections.sort(ads);
 		
 		return ads;
 	}
