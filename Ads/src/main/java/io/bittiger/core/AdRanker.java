@@ -63,6 +63,7 @@ public class AdRanker {
 			ads.add(ad);
 		}
 		
+		
 		return ads;
 	}
 	
