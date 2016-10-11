@@ -23,17 +23,11 @@ public class QueryProcessorImpl implements QueryProcessor {
     @Override
     public List<String> queryProcessor(String queryStr) {
         List<String> tokens = new ArrayList<>();
-
         AttributeFactory factory = AttributeFactory.DEFAULT_ATTRIBUTE_FACTORY;
-
         Tokenizer tokenizer = new StandardTokenizer(factory);
-
         tokenizer.setReader(new StringReader(queryStr));
-
         CharArraySet stop_words = EnglishAnalyzer.getDefaultStopSet();
-
         TokenStream ts = new StopFilter(tokenizer, stop_words);
-
         return NeededTokenMining(tokens, tokenizer, ts);
     }
 
