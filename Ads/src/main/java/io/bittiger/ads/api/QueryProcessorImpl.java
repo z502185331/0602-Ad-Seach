@@ -12,7 +12,9 @@ import org.apache.lucene.util.AttributeFactory;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by ChenCheng on 10/11/2016.
@@ -41,8 +43,9 @@ public class QueryProcessorImpl implements QueryProcessor {
             e.printStackTrace();
         }
 
-        return tokens;
+        return deduplicate(tokens);
     }
+
 
     private void TokenStreamHandle(TokenStream ts, CharTermAttribute cta, List<String> tokens, Tokenizer tokenizer) {
         try {
@@ -73,7 +76,21 @@ public class QueryProcessorImpl implements QueryProcessor {
             e.printStackTrace();
         }
 
-
     }
+
+    private List<String> deduplicate(List<String> tokens) {
+        Set<String> hs = new HashSet<>();
+
+        List<String> result = new ArrayList<>();
+
+        for (String str : tokens){
+            if (hs.add(str)){
+                result.add(str);
+            }
+        }
+
+        return  result;
+    }
+
 
 }
