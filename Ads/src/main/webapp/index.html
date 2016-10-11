@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AdSearch SYSTEM</title>
+    <script src="js/angular.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/service.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
+
+    <link href="css/bootstrap.min.css">
+</head>
+<body ng-app="AdsSearchApp"  ng-controller="AdsSearchController">
+
+    <div class="row" style="text-align: center">
+        <h1>Ads Search System 0602</h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <input type="text" id="query_field" class="form-control" placeholder="Search for ads"
+                       ng-model="searchText" style="width: 80%; display: inline">
+
+                <button id="query_button" ng-click="getTokens()" type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
