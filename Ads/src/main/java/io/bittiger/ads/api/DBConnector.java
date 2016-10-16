@@ -33,6 +33,10 @@ public class DBConnector {
     private static final int PORTNUMBER = 27017;
     private static final int INITCLICKCOUNT = 1;
     private static final int INITDISPLAYCOUNT = 2;
+    private static final String DBNAME = "ADSEARCH";
+    private static final String ADS_COLLECTION = "ADS";
+    private static final String CAMPAIGNS_COLLECTION = "CAMPAIGNS";
+    private static final String KEYWORDS_COLLECTION = "KEYWORDS";
 
     // The connection to the ads collection
     private MongoCollection<Document> adCollection;
@@ -45,12 +49,12 @@ public class DBConnector {
         MongoClient mongoClient = new MongoClient(SERVERADDR, PORTNUMBER);
 
         // Connect to the database
-        MongoDatabase mongoDatabase = mongoClient.getDatabase("local");
+        MongoDatabase mongoDatabase = mongoClient.getDatabase(DBNAME);
 
         // Connect to the collection
-        adCollection = mongoDatabase.getCollection("ads");
-        campaignCollection = mongoDatabase.getCollection("campaigns");
-        keywordCollection = mongoDatabase.getCollection("keywords");
+        adCollection = mongoDatabase.getCollection(ADS_COLLECTION);
+        campaignCollection = mongoDatabase.getCollection(CAMPAIGNS_COLLECTION);
+        keywordCollection = mongoDatabase.getCollection(KEYWORDS_COLLECTION);
 
     }
 
