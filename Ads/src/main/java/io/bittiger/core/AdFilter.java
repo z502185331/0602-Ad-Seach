@@ -22,11 +22,16 @@ import io.bittiger.ads.entity.Ad;
 public class AdFilter {
 
 	private int k;
-	
+
 	public AdFilter(int k) {
 		this.k = k;
 	}
-	
+
+	/**
+	 * Filter the ads from the list.
+	 * @param ads
+	 * @return
+	 */
 	public List<Ad> execute(List<Ad> ads) {
 		
 		// The list contains all the ads that are filtered out

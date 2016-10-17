@@ -20,12 +20,12 @@ import io.bittiger.ads.entity.Ad;
  *
  */
 public class AdRanker {
-	
+
 	private List<Ad> ads = new ArrayList<>();
-	
-	
+
+
 	/**
-	 * A method to execute rank task to rank the ads related to the keywords 
+	 * Execute rank task to rank the ads related to the keywords
 	 * @param keywords the list of keywords
 	 * @return a list of ads
 	 */
@@ -53,7 +53,7 @@ public class AdRanker {
 			
 			Ad ad = connector.getAdsById(entry.getKey());
 			double relevanceScore = (double) entry.getValue() / ad.getKeywords().size();
-			double qualityScore = (double) 0.75 * ad.getpClick() + 0.25 * relevanceScore;
+			double qualityScore = 0.75 * ad.getpClick() + 0.25 * relevanceScore;
 			double rankScore = qualityScore * ad.getBid();
 			
 			ad.setRelevanceScore(relevanceScore);

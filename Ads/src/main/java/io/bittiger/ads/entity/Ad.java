@@ -19,6 +19,7 @@ public class Ad implements Comparable<Ad> {
     private double rankScore;
     private double relevanceScore;
     private double qualityScore;
+	private double price;
 
 
 	public Ad() {
@@ -37,6 +38,7 @@ public class Ad implements Comparable<Ad> {
 		this.bid = bid;
 		this.url = url;
 		this.content = content;
+		this.price = 0.0;
 	}
     
 	
@@ -126,19 +128,27 @@ public class Ad implements Comparable<Ad> {
 	public void setQualityScore(double qualityScore) {
 		this.qualityScore = qualityScore;
 	}
-    
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 	@Override
 	public String toString() {
 		return "Rank score: " + this.rankScore + " Ad : " + this.adId + ", " + this.campaignId + ", " + this.keywords + ", " + this.clickCount + ", " + this.displayCount
-				+ ", " + this.bid + ", " +  this.url + ", " +  this.content;
+				+ ", " + this.bid + ", " +  this.url + ", " +  this.content + ", " + this.price;
 	}
-
 
 	@Override
 	public int compareTo(Ad o) {
 		return ((Double)o.rankScore).compareTo(this.rankScore);
 	}
-	
+
+
 
 
 }
