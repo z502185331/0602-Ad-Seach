@@ -17,4 +17,5 @@ function enableButtons() {
 }
 function loadCallback() {
     enableButtons();
+
 }
